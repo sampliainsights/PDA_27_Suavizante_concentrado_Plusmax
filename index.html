@@ -49,7 +49,7 @@ button,input{font:inherit;color:inherit}
 .nav a{display:flex;font-family:var(--font-head);text-transform:uppercase;letter-spacing:.03em;justify-content:space-between;align-items:center;padding:7px 10px;margin:0 -10px;border-radius:3px;color:var(--ink-70);text-decoration:none;font-weight:600;font-size:.9rem;transition:background-color 160ms ease,color 160ms ease}
 .nav a.active{background:var(--blush-50);color:var(--rasp)}
 @media (hover:hover) and (pointer:fine){.nav a:hover{background:var(--mist);color:var(--ink)}.nav a.active:hover{background:var(--blush-50);color:var(--rasp)}}
-.status{display:flex;align-items:center;gap:8px;font-size:.78rem;color:var(--ink-50);margin-bottom:12px}
+.status{display:none;align-items:center;gap:8px;font-size:.78rem;color:var(--ink-50);margin-bottom:12px}
 .status i{width:8px;height:8px;border-radius:50%;background:var(--neutral);flex:none}
 .status.live i{background:var(--dusk)} .status.local i{background:var(--melon)}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--line);background:var(--paper);border-radius:3px;padding:9px 14px;font-family:var(--font-head);font-weight:700;font-size:.86rem;text-transform:uppercase;letter-spacing:.03em;cursor:pointer;transition:transform 160ms var(--ease-out),background-color 160ms ease}
@@ -1207,7 +1207,8 @@ function renderInsights() {
 function renderHero() {
   const sel = rowsSel(), all = rowsAll();
   const si = all.filter(r => r.compra === 'Sí').length, n = all.filter(r => r.compra).length;
-  $('#factN').textContent = sel.length + (sel.length !== state.rows.length ? ` de ${state.rows.length}` : '');
+  const totalSource = state.rows.length + (state.excluded || 0);
+  $('#factN').textContent = totalSource;
   $('#factBuy').textContent = pct(si, n);
   $$('[data-seal-n]').forEach(el => el.textContent = sel.length);
   const nSi = all.filter(r => r.compra === 'Sí').length, nNo = all.filter(r => r.compra === 'No').length;
